@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로젝트</title>
+  <style>
+    .ball {
+      width: 10rem;
+      height: 10rem;
+      margin: .5rem;
+      border-radius: 50%;
+      background-color: coral;
+      /* 컨텐츠 중앙, 수직 정렬 */
+      text-align: center;
+      line-height: 10rem;
+      /* 폰트 정리 */
+      font-size: xx-large;
+      font-weight: bold;
+      color:whitesmoke;
+      
+    }
+    .ball-container {
+      display: flex;
+    }
+    .a1{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .a2{
+      color: coral;
+    }
+    
+  </style>
+</head>
+<body>
+  <div class="a1">
+    <h1 class="a2" >로또 추천 번호</h1>
+    <button id="lotto-btn" >행운 번호 받기</button>
+    <div>
+    <div id="result" >
+    </div> 
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+  <script>
+    const button = document.querySelector('#lotto-btn')
+    button.addEventListener('click', function() {
+      // 컨테이너를 만들고
+      const ballContainer = document.createElement('div')
+      ballContainer.classList.add('ball-container')
+      // 공을 만들어서 =>  6개를 만들어서
+      const numbers = _.sampleSize(_.range(1, 46), 6)
+      numbers.forEach(number => {
+        const ball = document.createElement('div')
+        ball.innerText = number
+        ball.classList.add('ball')
+        for (let i = 0; i <= numbers.length - 1; i ++) {
+        if (number<=10){
+          ball.style.backgroundColor = 'yellow'
+        }else if (number<=20){
+          ball.style.backgroundColor = 'blue'
+        }else if (number<=30){
+          ball.style.backgroundColor = 'red'
+        }else if (number<=40){
+          ball.style.backgroundColor = 'black'
+        }else if (number<=45){
+          ball.style.backgroundColor = 'chartreuse'
+        }
+        
+      }
+        ballContainer.appendChild(ball)       
+        console.log(numbers)
+      });
+      
+      const result = document.querySelector('#result')
+      result.appendChild(ballContainer)
+    
+    })
+
+
+  </script>
+</body>
+</html>
